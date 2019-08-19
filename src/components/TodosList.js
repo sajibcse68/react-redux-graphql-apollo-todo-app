@@ -25,7 +25,7 @@ export default class TodosList extends React.Component {
     }
 
     return (
-      <table>
+      <table border="1">
          {/* <TodosListHeader /> */}
         <tbody>
           {this.renderItems()}
