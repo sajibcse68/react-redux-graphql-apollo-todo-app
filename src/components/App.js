@@ -25,6 +25,8 @@ const todos = {
   },
   toggle(id) {
     let todoItem = this.items[id];
+    todoItem.isCompleted = !todoItem.isCompleted;
+    this.save();
   },
   add(obj) {
     this.items.push(obj);
