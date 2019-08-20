@@ -1,17 +1,16 @@
 import React from "react";
+import { connect } from "react-redux";
 // import TodosListheader from "./TodosListHeader";
 import TodosListItem from "./TodosListItem";
 
-export default class TodosList extends React.Component {
+class TodosList extends React.Component {
   renderItems() {
-    return this.props.todos.map((c, index) => {
-    console.log('todos: ', {...c})
+    return this.props.todoss.map((c, index) => {
 
       return (
         <TodosListItem
           key={index}
           {...c}
-          id={index}
           toggleTask={this.props.toggleTask}
           editTask={this.props.editTask}
           deleteTask={this.props.deleteTask}
@@ -34,3 +33,11 @@ export default class TodosList extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    todoss: state.todos
+  }
+}
+
+export default connect(mapStateToProps)(TodosList);

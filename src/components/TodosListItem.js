@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { toggleTodo } from './../actions';
 
-export default class TodosListItem extends React.Component {
+class TodosListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +27,8 @@ export default class TodosListItem extends React.Component {
     )
   }
   renderTask() {
-    const { task, isCompleted } = this.props;
+    const { id, task, isCompleted } = this.props;
+    console.log('isCompleted: ', isCompleted);
     const taskStyle = {
       cursor: 'pointer'
     };
@@ -40,7 +43,7 @@ export default class TodosListItem extends React.Component {
     }
 
     return (
-      <td onClick={this.toggleTask.bind(this)} style={taskStyle}>{task}</td>
+      <td onClick={() => this.props.toggleTodo(id)} style={taskStyle}>{task}</td>
     )
   }
   render(){
@@ -57,9 +60,6 @@ export default class TodosListItem extends React.Component {
       isEditing
     });
   }
-  toggleTask() {
-    this.props.toggleTask(this.props.id);
-  }
   editTask(e) {
     this.props.editTask(this.props.id, this.refs.task.value);
     this.setState({
@@ -71,3 +71,15 @@ export default class TodosListItem extends React.Component {
     this.props.deleteTask(this.props.id);
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    todoss: state.todos
+  }
+}
+
+const mapDispatchToProps = {
+  toggleTodo
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodosListItem);

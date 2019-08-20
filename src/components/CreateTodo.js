@@ -1,6 +1,13 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { addTodo } from '../actions'
 
 class CreateTodo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { inputEl: '' };
+  }
+
   render() {
     return (
       <form onSubmit={this.onSubmit.bind(this)} className="create-todo-form">
@@ -11,9 +18,17 @@ class CreateTodo extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    this.props.createTask(this.refs.taskMessage.value);
-    this.refs.taskMessage.value = "";
+    // debugger;
+    if (!this.refs.taskMessage.value.trim()) return;
+    this.props.addTodo(this.refs.taskMessage.value);
+    this.refs.taskMessage.value = '';
+    // this.props.createTask(this.refs.taskMessage.value);
+    // this.refs.taskMessage.value = "";
   }
 }
 
-export default CreateTodo;
+const mapDispatchToProps = {
+  addTodo
+}
+
+export default connect(null, mapDispatchToProps)(CreateTodo);

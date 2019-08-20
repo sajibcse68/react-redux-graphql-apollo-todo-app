@@ -61,9 +61,7 @@ class App extends React.Component {
           direction="right"
         />
         <h1>TODOs</h1>
-        <CreateTodo
-          createTask={this.createTask.bind(this)}
-        />
+        <CreateTodo />
         <TodosList
           todos={this.state.todos}
           toggleTask={this.toggleTask.bind(this)}
@@ -75,22 +73,11 @@ class App extends React.Component {
       </div>
     )
   }
-  createTask(task) {
-    task = task.trim();
-    if (!task) return;
-
-    todos.add({
-      task,
-      isComplete: false
-    });
-    this.setState({ todos: this.state.todos });
-  }
   toggleTask(taskId) {
     todos.toggle(taskId);
     this.setState({ todos: this.state.todos });
   }
   editTask(taskId, task) {
-    console.log("taskId: ", taskId, "---task: ", task);
     todos.update(taskId, task);
     this.setState({todos: this.state.todos });
   }
