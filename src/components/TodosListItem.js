@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { toggleTodo } from './../actions';
+import { toggleTodo, editTodo, deleteTodo } from './../actions';
 
 class TodosListItem extends React.Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class TodosListItem extends React.Component {
     };
   }
   renderActionSection() {
-    console.log('>>>', this.state)
     if (this.state.isEditing) {
       return (
         <td>
@@ -28,7 +27,6 @@ class TodosListItem extends React.Component {
   }
   renderTask() {
     const { id, task, isCompleted } = this.props;
-    console.log('isCompleted: ', isCompleted);
     const taskStyle = {
       cursor: 'pointer'
     };
@@ -61,14 +59,14 @@ class TodosListItem extends React.Component {
     });
   }
   editTask(e) {
-    this.props.editTask(this.props.id, this.refs.task.value);
+    this.props.editTodo({ id: this.props.id, task: this.refs.task.value, isCompleted: false });
     this.setState({
       isEditing: false
     });
     e.preventDefault();
   }
   deleteTask() {
-    this.props.deleteTask(this.props.id);
+    this.props.deleteTodo(this.props.id);
   }
 }
 
@@ -79,7 +77,9 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  toggleTodo
+  toggleTodo,
+  editTodo,
+  deleteTodo
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodosListItem);

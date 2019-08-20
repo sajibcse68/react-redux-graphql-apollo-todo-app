@@ -5,15 +5,12 @@ import TodosListItem from "./TodosListItem";
 
 class TodosList extends React.Component {
   renderItems() {
-    return this.props.todoss.map((c, index) => {
+    return this.props.todos.map((c, index) => {
 
       return (
         <TodosListItem
           key={index}
           {...c}
-          toggleTask={this.props.toggleTask}
-          editTask={this.props.editTask}
-          deleteTask={this.props.deleteTask}
         />
       );
     });
@@ -36,7 +33,7 @@ class TodosList extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    todoss: state.todos
+    todos: state.todos
   }
 }
 
