@@ -5,18 +5,29 @@ const todos = (state = [], action) => {
         ...state,
         {
           id: action.id,
-          text: action.text,
-          completed: false
+          task: action.text,
+          isCompleted: false
         }
       ]
     case 'TOGGLE_TODO':
       return state.map(todo => 
         (todo.id === action.id)
-          ? {...todo, completed: !todo.completed}
+          ? {...todo, isCompleted: !todo.isCompleted}
           : todo
       )
     default:
-      return state
+      return [
+        {
+          id: 1,
+          task: "todo 1",
+          isCompleted: false
+        },
+        {
+          id: 2,
+          task: "todo 2",
+          isCompleted: false
+        }
+      ]
   }
 };
 
