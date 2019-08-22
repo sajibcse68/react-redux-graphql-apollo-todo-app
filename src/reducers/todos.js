@@ -8,6 +8,9 @@ const getTodos = () => {
 
 const todos = (state = [], action) => {
   switch (action.type) {
+    case 'SET_TODOS':
+      setTodos([...action.todos])
+      return getTodos();
     case "ADD_TODO":
       setTodos([...getTodos(), {
         id: state.length,

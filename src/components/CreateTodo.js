@@ -18,7 +18,6 @@ class CreateTodo extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault();
-    // debugger;
     if (!this.refs.taskMessage.value.trim()) return;
     this.props.addTodo(this.refs.taskMessage.value);
     this.refs.taskMessage.value = '';

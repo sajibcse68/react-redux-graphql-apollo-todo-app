@@ -26,7 +26,7 @@ class TodosListItem extends React.Component {
     )
   }
   renderTask() {
-    const { id, task, isCompleted } = this.props;
+    const { id, name, isCompleted } = this.props;
     const taskStyle = {
       cursor: 'pointer'
     };
@@ -34,14 +34,14 @@ class TodosListItem extends React.Component {
       return (
         <td>
           <form onSubmit={this.editTask.bind(this)}>
-            <input ref="task" defaultValue={task} autoFocus/>
+            <input ref="task" defaultValue={name} autoFocus/>
           </form>
         </td>
       );
     }
 
     return (
-      <td onClick={() => this.props.toggleTodo(id)} style={taskStyle}>{task}</td>
+      <td onClick={() => this.props.toggleTodo(id)} style={taskStyle}>{name}</td>
     )
   }
   render(){

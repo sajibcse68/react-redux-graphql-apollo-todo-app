@@ -2,8 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 // import TodosListheader from "./TodosListHeader";
 import TodosListItem from "./TodosListItem";
+import { getTodos } from './../actions'
 
 class TodosList extends React.Component {
+  componentDidMount() {
+    this.props.getTodos();
+  }
   renderItems() {
     return this.props.todos.map((c, index) => {
 
@@ -37,4 +41,8 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(TodosList);
+const mapDispatchToProps = {
+  getTodos: getTodos
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodosList);
